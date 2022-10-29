@@ -1,0 +1,131 @@
+:root {
+    --main-red: #c8344c;
+    --main-cyan: #61dafb;
+    --main-white: #fdfdfd;
+    --main-gray: #6b7281;
+    --dark: #121a26;
+    --light: #dfdbff;
+}
+* {
+    box-sizing: border-box;
+    font-family: "Poppins", "Comic Sans MS";
+    font-weight: 200;
+    color: var(--main-white);
+
+}
+
+.wrapper-calc {
+    display: flex;
+    flex-direction: column;
+    background-color: #e1d5d5;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100vw;
+
+}
+.calculator {
+    width: 100%;
+    max-width: 400px;
+    background-color: #FFF;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+
+}
+.display {
+    padding: 16px;
+    text-align: right;
+    background-color: var(--dark);
+    font-size: 24px;
+    font-weight: 300;
+    display: flex;
+    flex-direction: row;
+
+}
+.display * {
+    flex: 1 1 50%;
+
+}
+
+.display .wrapper-history {
+    display: flex;
+    text-align: left;
+    align-items: center;
+    position: relative;
+
+}
+
+.display .wrapper-history i:hover {
+    opacity: .8;
+    transition: 400ms;
+    cursor: pointer;
+
+
+}
+.toggle-history {
+    position: absolute;
+    left: calc(100%/2);
+    background-color: var(--light);
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+    font-size: 15px;
+    color: #888;
+    font-weight: lighter;
+}
+.show-history {
+    opacity: 1;
+    transition: 400ms;
+}
+.hide-history {
+    opacity: 0;
+    transition: 400ms;
+
+}
+.display span {
+    font-size: 14px;
+    color: #888;
+
+}
+.btn {
+    appearance: none;
+    border: none;
+    outline: none;
+    color: #FFF;
+    font-size: 20px;
+    padding: 16px;
+    cursor: pointer;
+    transition: .4s;
+
+}
+.operators {
+    display: flex;
+
+}
+.operators .btn {
+    flex: 1 1 0%;
+    background-color: var(--main-red);
+    font-weight: 500;
+}
+.numbers {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.numbers .btn {
+    flex: 1 1 33.3333%;
+    max-width: 33.3333%;
+    background-color: var(--dark);
+}
+
+.btn:hover{
+    opacity: .9;
+    transition: 400ms;
+}
+
+
+
+
