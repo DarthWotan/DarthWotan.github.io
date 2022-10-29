@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import React from "react";
 import './App.css';
 import {Calculator} from "./calculator/Calculator"
+import {ToDoList} from "./toDoList/ToDoList";
 
 class App extends React.Component{
 
@@ -28,7 +29,7 @@ class App extends React.Component{
 
                 </section>
                 <section id="toDoList">
-
+                    <ToDoList />
                 </section>
 
 
