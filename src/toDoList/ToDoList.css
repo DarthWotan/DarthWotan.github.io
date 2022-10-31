@@ -1,0 +1,90 @@
+:root {
+    --light-green: #98b897;
+    --light-yellow: #fccda9;
+    --light-yellow-transparent: rgba(252, 205, 169, 0.7);
+    --light-red: #f3827d;
+    --normal-red: #c8344c;
+    --background-green: #27363b;
+
+
+}
+
+.app {
+    background-color: var(--background-green);
+    height: 100vh;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid var(--light-green);
+    padding: .5rem 6rem;
+}
+
+.list-item-wrapper {
+    position: relative;
+    display: flex;
+    width: fit-content;
+    font-size: 20px;
+}
+
+.list-item, .list-text {
+    transition: background-color ease-in-out 400ms, color ease-in-out 400ms;
+    border-radius: 5px;
+
+}
+
+
+.list-item:hover:not(.done) .list-text { /* For the task, if it is unfinished */
+    cursor: pointer;
+    background-color: var(--light-yellow-transparent);
+    color: var(--background-green);
+    transition: background-color ease-in-out 400ms, color ease-in-out 400ms;
+}
+
+.list-item:hover .list-text {  /* For the task, if it is finished */
+    cursor: pointer;
+    background-color: var(--light-green);
+    color: var(--background-green);
+    text-decoration: none;
+    transition: ease-in-out 400ms;
+}
+
+.done .list-text {
+    opacity: .7;
+    text-decoration: line-through;
+    transition: ease-in-out 400ms;
+
+}
+
+.list-bullet {
+    color: var(--light-red);
+}
+
+.list-text {
+    padding: 0 .5rem;
+}
+
+.fa-trash-can {
+    position: absolute;
+    left: 6.5em;
+    bottom: 1em;
+    transition: color ease-in-out 400ms;
+
+}
+
+.fa-trash-can:hover {
+    color: var(--main-red);
+    transition: color ease-in-out 400ms;
+
+}
+
+
+

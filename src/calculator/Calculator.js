@@ -59,7 +59,10 @@ export class Calculator extends React.Component {
         }
         const value = this.state.calc.slice(0, -1);
         this.setState({
-            calc: value
+            calc: value,
+        });
+        this.setState({
+            result: eval(value).toString()
         })
     }
 
