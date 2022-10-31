@@ -11,7 +11,8 @@
 
 .app {
     background-color: var(--background-green);
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
     width: 100%;
 
     display: flex;
@@ -26,6 +27,38 @@ header {
     justify-content: center;
     border-bottom: 2px solid var(--light-green);
     padding: .5rem 6rem;
+}
+
+.circle {
+    border-radius: 100%;
+    width: 2rem;
+    height: 2rem;
+
+}
+
+.white {
+    background-color: var(--main-white);
+
+}
+
+.fa-plus {
+    color: var(--background-green);
+}
+
+#input-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: ease-in-out 400ms;
+    margin: 2rem
+
+}
+#input-circle:hover {
+    cursor: pointer;
+    opacity: .7;
+    transform: scale(110%);
+    transition: ease-in-out 400ms;
 }
 
 .list-item-wrapper {
@@ -49,7 +82,7 @@ header {
     transition: background-color ease-in-out 400ms, color ease-in-out 400ms;
 }
 
-.list-item:hover .list-text {  /* For the task, if it is finished */
+.list-item:hover .list-text { /* For the task, if it is finished */
     cursor: pointer;
     background-color: var(--light-green);
     color: var(--background-green);
@@ -64,8 +97,15 @@ header {
 
 }
 
-.list-bullet {
+.list-item:not(.done) .list-bullet {
     color: var(--light-red);
+    transition: ease-in-out 400ms;
+
+}
+
+.list-bullet {
+    color: var(--light-green);
+    transition: ease-in-out 400ms;
 }
 
 .list-text {
@@ -82,8 +122,9 @@ header {
 
 .fa-trash-can:hover {
     color: var(--main-red);
-    transition: color ease-in-out 400ms;
-
+    transform: scale(110%);
+    cursor: pointer;
+    transition: ease-in-out 400ms;
 }
 
 

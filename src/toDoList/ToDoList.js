@@ -31,7 +31,7 @@ export function ToDoList() {
         </header>
         <main>
             <section id="input">
-                <InputNewTask/>
+                <InputNewTask />
 
             </section>
             <section id="list">
@@ -69,6 +69,8 @@ function ListItem(props) {
 }
 
 function InputNewTask(props) {
-
+    return (<div className="circle white" id="input-circle">
+        <i className="fa-solid fa-plus"></i>
+    </div>);
 }
 
