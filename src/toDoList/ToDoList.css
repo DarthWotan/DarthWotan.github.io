@@ -5,6 +5,7 @@
     --light-red: #f3827d;
     --normal-red: #c8344c;
     --background-green: #27363b;
+    --no-color: rgba(0, 0, 0, 0);
 
 
 }
@@ -29,6 +30,26 @@ header {
     padding: .5rem 6rem;
 }
 
+
+#list-main {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#list {
+    width: fit-content;
+}
+
+#input {
+    width: 70vw;
+}
+
+
+
+/* Task List */
 .list-item-wrapper {
     position: relative;
     display: flex;
@@ -37,6 +58,7 @@ header {
     align-items: center;
 }
 
+/* general classes */
 .circle {
     border-radius: 50%;
     width: 2rem;
@@ -50,10 +72,19 @@ header {
 }
 
 .invisible {
-    background-color: rgba(0,0,0,0);
+    background-color: var(--no-color);
+    border: none;
+
 }
 
+.active {
+    width: 70vw;
+    height: calc(2rem * 1.1);
+    border-radius: 30px;
+    transition: border ease-in-out 400ms, width ease-in-out 400ms;
+}
 
+/* task menu */
 #input-menu {
     display: flex;
     justify-content: center;
@@ -61,9 +92,6 @@ header {
     position: relative;
     transition: border ease-in-out 400ms, width ease-in-out 400ms;
     margin: 2rem;
-
-
-
 }
 
 #input-menu:not(.active) {
@@ -73,14 +101,6 @@ header {
 
 }
 
-.active {
-    width: 70vw;
-    height: calc(2rem * 1.1);
-    border-radius: 30px;
-    transition: border ease-in-out 400ms, width ease-in-out 400ms;
-
-
-}
 
 #input-menu:hover:not(.active) {
     cursor: pointer;
@@ -113,7 +133,8 @@ header {
     transform: rotate(45deg);
     margin-right: auto;
     margin-left: .1em;
-    padding: 1rem;transition: ease-in-out 400ms;
+    padding: 1rem;
+    transition: ease-in-out 400ms;
 
 
 }
@@ -125,7 +146,76 @@ header {
 
 }
 
+/* form */
+#new-task-form {
+    color: var(--background-green);
+    pointer-events: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+#input-menu:not(.active) #new-task-form {
+    pointer-events: none;
+    position: absolute;
+    left: 3rem;
+
+}
+
+#input-menu:not(.active) #text-input-form, #input-menu:not(.active) #form-button {
+    opacity: 0;
+    transition: opacity 0ms;
+    width: 0;
+}
+
+#text-input-form {
+    color: var(--background-green);
+    font-size: 15px;
+    font-weight: 300;
+    background-color: var(--no-color);
+    border: 1px solid var(--background-green);
+    border-radius: .5rem;
+    padding: 0 .4rem;
+    margin-left: auto;
+    width: 50%;
+    transition: ease-in-out 1000ms;
+
+}
+
+#form-button {
+    background-color: var(--main-white);
+    border: none;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: .2em;
+    border-radius: 1rem;
+    padding: 0 1rem;
+    text-align: center;
+    transition: ease-in-out 400ms;
+}
+
+#form-button:hover {
+    cursor: pointer;
+    transform: scale(110%);
+    background-color: rgba(39, 54, 59, 0.1);
+
+}
+
+
+#input-menu:not(.active) #form-button {
+    opacity: 0;
+}
+
+.fa-check {
+    color: var(--normal-red)
+}
+
+#input-menu:not(.active) .fa-check {
+    color: var(--no-color);
+}
+
+/* Task Items */
 .list-item, .list-text {
     transition: background-color ease-in-out 400ms, color ease-in-out 400ms;
     border-radius: 5px;

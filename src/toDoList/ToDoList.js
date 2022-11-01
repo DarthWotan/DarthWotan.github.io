@@ -6,23 +6,29 @@ export function ToDoList() {
         done: false, text: "test bullet2"
     }, {done: false, text: "test bullet332432423"}]);
 
-    const [activeMenu, setActiveMenu] = useState(false)
+    const [activeMenu, setActiveMenu] = useState(false);
 
-    const addTask = (task) => {
+    const [inputValue, setInputValue] = useState("");
+
+    const addTask = (event, task) => {
+        event.preventDefault();
         setTasks((oldTasks) => [...oldTasks, {done: false, text: task}]);
+        setInputValue("");
+
+
 
     }
 
-    const example = () => {
+    const handleInput = (event) => {
+        setInputValue(event.target.value);
+        console.log(inputValue)
     }
+
 
     const deleteTask = (id) => {
         tasks.splice(id, 1);
         setTasks([...tasks]);
 
-    }
-
-    const handleClick = (event) => {
     }
 
 
@@ -40,9 +46,16 @@ export function ToDoList() {
         <header>
             <h1>Tasks to do</h1>
         </header>
-        <main>
+        <main id="list-main">
             <section id="input">
-                <InputNewTask active={activeMenu} toggleMenu={() => setActiveMenu(!activeMenu)}/>
+                <InputNewTask active={activeMenu} toggleMenu={() => {
+                    setActiveMenu(!activeMenu);
+                    setInputValue("");
+                }}
+                              handleSubmit={addTask}
+                              handleChange={handleInput}
+                              value={inputValue}
+                />
 
             </section>
             <section id="list">
@@ -51,7 +64,8 @@ export function ToDoList() {
                         return (<ListItem element={element}
                                           key={index}
                                           check={() => check(index)}
-                                          deleteTask={() => deleteTask(index)}/>);
+                                          deleteTask={() => deleteTask(index)}
+                        />);
                     })}
                 </ul>
 
@@ -86,10 +100,12 @@ function InputNewTask(props) {
         <div onClick={props.toggleMenu} className="white circle" id="toggle-circle">
             <i className="fa-solid fa-plus"></i>
         </div>
-        { /*<form>
-        <input type="text" value={props.value} onChange={props.handleChange}/>
-            <button type="submit"><i className="fa-solid fa-check"></i></button>
-        </form>*/}
+        <form id="new-task-form" onSubmit={(event => props.handleSubmit(event, props.value))}>
+            <input className={props.active ? "" : "invisible"} type="text" value={props.value}
+                   onChange={props.handleChange} id="text-input-form" required={true}/>
+            <button className={props.active ? "" : "invisible"} type="submit" id="form-button"><i
+                className="fa-solid fa-check"></i></button>
+        </form>
     </div>);
 }
 
