@@ -29,8 +29,16 @@ header {
     padding: .5rem 6rem;
 }
 
+.list-item-wrapper {
+    position: relative;
+    display: flex;
+    width: fit-content;
+    font-size: 20px;
+    align-items: center;
+}
+
 .circle {
-    border-radius: 100%;
+    border-radius: 50%;
     width: 2rem;
     height: 2rem;
 
@@ -41,32 +49,82 @@ header {
 
 }
 
-.fa-plus {
-    color: var(--background-green);
+.invisible {
+    background-color: rgba(0,0,0,0);
 }
 
-#input-circle {
+
+#input-menu {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    transition: ease-in-out 400ms;
-    margin: 2rem
+    transition: border ease-in-out 400ms, width ease-in-out 400ms;
+    margin: 2rem;
+
+
 
 }
-#input-circle:hover {
+
+#input-menu:not(.active) {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 30px;
+
+}
+
+.active {
+    width: 70vw;
+    height: calc(2rem * 1.1);
+    border-radius: 30px;
+    transition: border ease-in-out 400ms, width ease-in-out 400ms;
+
+
+}
+
+#input-menu:hover:not(.active) {
     cursor: pointer;
     opacity: .7;
     transform: scale(110%);
     transition: ease-in-out 400ms;
+
 }
 
-.list-item-wrapper {
-    position: relative;
+#toggle-circle {
     display: flex;
-    width: fit-content;
-    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-right: auto;
+    padding: 1rem;
+    z-index: 1;
+    transition: ease-in-out 400ms;
+
+
 }
+
+.active #toggle-circle:hover {
+    cursor: pointer;
+    transform: scale(110%) rotate(45deg);
+    background-color: rgba(39, 54, 59, 0.1);
+
+}
+
+.active #toggle-circle {
+    transform: rotate(45deg);
+    margin-right: auto;
+    margin-left: .1em;
+    padding: 1rem;transition: ease-in-out 400ms;
+
+
+}
+
+.fa-plus {
+    color: var(--background-green);
+    font-size: 20px;
+    transition: ease-in-out 400ms;
+
+}
+
 
 .list-item, .list-text {
     transition: background-color ease-in-out 400ms, color ease-in-out 400ms;
@@ -113,9 +171,8 @@ header {
 }
 
 .fa-trash-can {
-    position: absolute;
-    left: 6.5em;
-    bottom: 1em;
+    margin-left: 1.5em;
+    margin-bottom: 1em;
     transition: color ease-in-out 400ms;
 
 }

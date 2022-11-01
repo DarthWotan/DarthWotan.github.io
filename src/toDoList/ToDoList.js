@@ -2,12 +2,20 @@ import React, {useState} from "react";
 import "./ToDoList.css";
 
 export function ToDoList() {
-    const [tasks, setTasks] = useState([{done: false, text: "test bullet"}]);
+    const [tasks, setTasks] = useState([{done: false, text: "test bullet"}, {
+        done: false, text: "test bullet2"
+    }, {done: false, text: "test bullet332432423"}]);
+
+    const [activeMenu, setActiveMenu] = useState(false)
 
     const addTask = (task) => {
         setTasks((oldTasks) => [...oldTasks, {done: false, text: task}]);
 
     }
+
+    const example = () => {
+    }
+
     const deleteTask = (id) => {
         tasks.splice(id, 1);
         setTasks([...tasks]);
@@ -21,6 +29,9 @@ export function ToDoList() {
     // (un)marks a bullet
     const check = (id) => {
         tasks[id].done = !tasks[id].done;
+        //todo: tasks.sort((a, b) => Number(a.done) - Number(b.done))
+        //--> to sort the tasks (first the unfinished tasks) --> maybe with smooth transition (zu hektisch)
+
         setTasks([...tasks])
     }
 
@@ -31,7 +42,7 @@ export function ToDoList() {
         </header>
         <main>
             <section id="input">
-                <InputNewTask />
+                <InputNewTask active={activeMenu} toggleMenu={() => setActiveMenu(!activeMenu)}/>
 
             </section>
             <section id="list">
@@ -69,8 +80,16 @@ function ListItem(props) {
 }
 
 function InputNewTask(props) {
-    return (<div className="circle white" id="input-circle">
-        <i className="fa-solid fa-plus"></i>
+
+
+    return (<div className={props.active ? "white active" : " invisible"} id="input-menu">
+        <div onClick={props.toggleMenu} className="white circle" id="toggle-circle">
+            <i className="fa-solid fa-plus"></i>
+        </div>
+        { /*<form>
+        <input type="text" value={props.value} onChange={props.handleChange}/>
+            <button type="submit"><i className="fa-solid fa-check"></i></button>
+        </form>*/}
     </div>);
 }
 
