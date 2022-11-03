@@ -37,6 +37,7 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 1rem;
 }
 
 #list {
@@ -180,6 +181,7 @@ header {
     margin-left: auto;
     width: 50%;
     transition: ease-in-out 1000ms;
+    text-align: center;
 
 }
 

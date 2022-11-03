@@ -2,9 +2,7 @@ import React, {useState} from "react";
 import "./ToDoList.css";
 
 export function ToDoList() {
-    const [tasks, setTasks] = useState([{done: false, text: "test bullet"}, {
-        done: false, text: "test bullet2"
-    }, {done: false, text: "test bullet332432423"}]);
+    const [tasks, setTasks] = useState([{done: false, text: "example task"}]);
 
     const [activeMenu, setActiveMenu] = useState(false);
 
@@ -14,7 +12,6 @@ export function ToDoList() {
         event.preventDefault();
         setTasks((oldTasks) => [...oldTasks, {done: false, text: task}]);
         setInputValue("");
-
 
 
     }
@@ -102,7 +99,7 @@ function InputNewTask(props) {
         </div>
         <form id="new-task-form" onSubmit={(event => props.handleSubmit(event, props.value))}>
             <input className={props.active ? "" : "invisible"} type="text" value={props.value}
-                   onChange={props.handleChange} id="text-input-form" required={true}/>
+                   onChange={props.handleChange} id="text-input-form" required={true} placeholder="Feed the dogs"/>
             <button className={props.active ? "" : "invisible"} type="submit" id="form-button"><i
                 className="fa-solid fa-check"></i></button>
         </form>
