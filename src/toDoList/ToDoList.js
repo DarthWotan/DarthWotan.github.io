@@ -57,13 +57,20 @@ export function ToDoList() {
             </section>
             <section id="list">
                 <ul className="fa-ul">
-                    {tasks.map((element, index) => {
+                    <span className="list-item-span">{tasks.map((element, index) => {
                         return (<ListItem element={element}
                                           key={index}
                                           check={() => check(index)}
-                                          deleteTask={() => deleteTask(index)}
+                            /* deleteTask={() => deleteTask(index)} */
                         />);
                     })}
+                    </span>
+                    <span className="delete-icon-span">
+                        {tasks.map((element, index) => {
+                            return <li><i className="fa-regular fa-trash-can" onClick={() => deleteTask(index)}></i>
+                            </li>
+                        })}
+                    </span>
                 </ul>
 
             </section>
@@ -86,7 +93,6 @@ function ListItem(props) {
         <li onClick={props.check} className={props.element.done ? "list-item done" : "list-item"}>{icon}<span
             className="list-text">{props.element.text}</span>
         </li>
-        <i className="fa-regular fa-trash-can" onClick={props.deleteTask}></i>
     </div>);
 }
 
