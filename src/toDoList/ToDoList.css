@@ -28,7 +28,7 @@ header {
     justify-content: center;
     border-bottom: 2px solid var(--light-green);
     padding: .5rem 6rem;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 
@@ -55,7 +55,7 @@ header {
     position: relative;
     display: flex;
     width: fit-content;
-    font-size: 20px;
+    font-size: 25px;
     align-items: center;
 }
 
@@ -75,7 +75,6 @@ header {
 .invisible {
     background-color: var(--no-color);
     border: none;
-
 }
 
 .active {
@@ -172,7 +171,7 @@ header {
 
 #text-input-form {
     color: var(--background-green);
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 300;
     background-color: var(--no-color);
     border: 1px solid var(--background-green);

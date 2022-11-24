@@ -32,7 +32,7 @@ export function ToDoList() {
     // (un)marks a bullet
     const check = (id) => {
         tasks[id].done = !tasks[id].done;
-        //todo: tasks.sort((a, b) => Number(a.done) - Number(b.done))
+        tasks.sort((a, b) => Number(a.done) - Number(b.done))
         //--> to sort the tasks (first the unfinished tasks) --> maybe with smooth transition (zu hektisch)
 
         setTasks([...tasks])
@@ -101,7 +101,7 @@ function InputNewTask(props) {
 
     return (<div className={props.active ? "white active" : " invisible"} id="input-menu">
         <div onClick={props.toggleMenu} className="white circle" id="toggle-circle">
-            <i className="fa-solid fa-plus"></i>
+            <span><i className="fa-solid fa-plus"></i></span>
         </div>
         <form id="new-task-form" onSubmit={(event => props.handleSubmit(event, props.value))}>
             <input className={props.active ? "" : "invisible"} type="text" value={props.value}

@@ -16,6 +16,7 @@ export class Calculator extends React.Component {
         this.calculate = this.calculate.bind(this);
         this.delete = this.delete.bind(this);
         this.toggleHistory = this.toggleHistory.bind(this);
+        this.deleteAll = this.deleteAll.bind(this);
         this.ops = ["-", "+", "*", "/", "."]
 
     }
@@ -66,6 +67,14 @@ export class Calculator extends React.Component {
         })
     }
 
+    deleteAll() {
+        console.log("deleting all")
+        this.setState({
+            calc: ""
+        });
+
+    }
+
     render() {
         const test = [];
         for(let i=9; i>=0;i--){
@@ -93,6 +102,7 @@ export class Calculator extends React.Component {
                             <button className="btn" onClick={() => this.updateCalc("/")} value="/">÷</button>
 
                             <button className="btn" onClick={this.delete} value="del">DEL</button>
+                            <button className="btn" onClick={this.deleteAll} value="ans">ANS</button>
                         </div>
                         <div className="numbers">
                             {test}
