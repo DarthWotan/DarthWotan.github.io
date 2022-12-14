@@ -3,6 +3,7 @@ import React from "react";
 import './App.css';
 import {Calculator} from "./calculator/Calculator"
 import {ToDoList} from "./toDoList/ToDoList";
+import {TicTacToeController} from "./TicTacToe/TicTacToeController"
 
 class App extends React.Component{
 
@@ -30,6 +31,10 @@ class App extends React.Component{
                 </section>
                 <section id="toDoList">
                     <ToDoList />
+                </section>
+
+                <section id="ticTacToe">
+                   <TicTacToeController></TicTacToeController>
                 </section>
 
 
