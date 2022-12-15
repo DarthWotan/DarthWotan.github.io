@@ -7,14 +7,24 @@ export function checkWin(grid, player, moves) {
         return checkRows(array) ? 0 : checkColumns(array) ? 1 : checkDiagonals(array) ? 2 : null;
     }
     const checkRows = (array) => {
-        let counter = 0;
-        for(let row=0; row<array.length; row+3) {
-            for(let cell=0; cell < 3; cell++){
-                if(grid[row*cell]==player.symbol) {
-                    counter++;
-                }
 
-            }}
+        for (let row = 0; row < array.length; row = row + 3) {
+
+            for (let cell = 0; cell < 3; cell++) {
+                //console.table({"Reihe": row, "Zelle": cell, ID: row + cell, Symbol: array[row + cell], Spieler: player});
+                if (array[cell + row] != player) {
+                    // console.log("kein Treffer")
+                    break;
+                }
+                else if (cell == 2) {
+                    // console.log("Treffer")
+                    return true;
+                }
+            }
+
+        }
+        return false;
+
 
     }
     const checkColumns = (array) => {
@@ -23,5 +33,7 @@ export function checkWin(grid, player, moves) {
     const checkDiagonals = (array) => {
 
     }
+
+    return checkRows(grid)
 
 }

@@ -23,12 +23,14 @@ export function TicTacToeController() {
             })
 
             setGrid(newGrid);
-            changePlayer(player);
             setMoves(moves + 1);
+            console.log(checkWin(newGrid, currentPlayer, moves))
+            changePlayer(player);
         }
 
         if (!newGrid.includes(null)) {
             // todo: check if there is one winner
+
             if (checkTie(moves)) {
                 setGameGoing(false);
             }
@@ -53,7 +55,12 @@ export function TicTacToeController() {
 
 
     const changePlayer = (player) => {
-        if (player == 1) setCurrentPlayer(0); else setCurrentPlayer(1);
+        if (player == 1) {
+            setCurrentPlayer(0);
+        }
+        else {
+            setCurrentPlayer(1);
+        }
     }
 
     const gridSection = () => {
