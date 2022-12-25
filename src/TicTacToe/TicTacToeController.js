@@ -120,3 +120,11 @@ function Subtitle(props) {
         </section>
     )
 }
+
+function line(props) {
+    return (
+       <div id="line">
+
+       </div>
+    );
+}
