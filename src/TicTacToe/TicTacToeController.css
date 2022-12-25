@@ -20,6 +20,7 @@
     margin: 0;
     height: 100vh;
     background-color: var(--dark-blue-t);
+    position: relative;
 
 }
 
@@ -106,3 +107,17 @@
     opacity: 80%;
     transition: opacity ease-in-out .2s;
 }
+
+/*
+#line {
+    width: 2rem;
+    height: 20rem;
+    background-color: var(--light-yellow-t);
+    margin: .5rem;
+    border-radius: .5em;
+    position: absolute;
+    left: 48vw;
+    bottom: 50vh;
+    border: none;
+
+}*/

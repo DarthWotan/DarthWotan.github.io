@@ -26,17 +26,12 @@ export function TicTacToeController() {
             setMoves(moves + 1);
             checkForWin(newGrid, currentPlayer,moves+1);
             // console.log(checkWin(newGrid, currentPlayer, moves), winner)
-
             changePlayer(player);
         }
-
-        if (!newGrid.includes(null)) {
-            // todo: check if there is one winner
-
-            if (checkTie(moves)) {
-                setGameGoing(false);
-            }
+        if (checkTie(moves)) {
+            setGameGoing(false);
         }
+
 
     }
 
@@ -53,7 +48,7 @@ export function TicTacToeController() {
 
     }
 
-    const checkTie = (count) => count <= 8;
+    const checkTie = (count) => count === 8;
 
     const checkForWin = (array, player, moves) => {
         const [win, type] = checkWin(array, player, moves);
@@ -80,18 +75,21 @@ export function TicTacToeController() {
     const gridSection = () => {
         const grids = [];
         for (let i = 0; i < 9; i++) {
-            grids.push(<Grid value={i} onClick={updateGrid} player={currentPlayer} grid={grid}
+            grids.push(<Grid key={i} value={i} onClick={updateGrid} player={currentPlayer} grid={grid}
                              className={gameGoing ? "" : "blurred"}/>);
         }
         return grids;
     }
 
-    return (<main id="TicTacToe">
+    return (
+        <main id="TicTacToe">
         <section id="grid-section">
             {gridSection()}
         </section>
+        <section >
         {!gameGoing ? <Subtitle winner={winner} restart={restart} />: null } {/*if the game is over, the subtitle shows up*/}
-
+        </section>
+        <Line />
     </main>);
 }
 
@@ -121,7 +119,7 @@ function Subtitle(props) {
     )
 }
 
-function line(props) {
+function Line(props) {
     return (
        <div id="line">
 
