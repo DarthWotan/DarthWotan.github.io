@@ -24,7 +24,9 @@ export function TicTacToeController() {
 
             setGrid(newGrid);
             setMoves(moves + 1);
-            console.log(checkWin(newGrid, currentPlayer, moves))
+            checkForWin(newGrid, currentPlayer,moves+1);
+            // console.log(checkWin(newGrid, currentPlayer, moves), winner)
+
             changePlayer(player);
         }
 
@@ -53,6 +55,18 @@ export function TicTacToeController() {
 
     const checkTie = (count) => count <= 8;
 
+    const checkForWin = (array, player, moves) => {
+        const [win, type] = checkWin(array, player, moves);
+        // win: boolean, type: String ("ROW", "COLUMN", "DIAGONAL", "NONE")
+        if(win) {
+            setWinner(currentPlayer);
+            setGameGoing(false);
+            console.log("hallo")
+        }
+        console.log(win);
+
+    }
+
 
     const changePlayer = (player) => {
         if (player == 1) {
@@ -76,18 +90,8 @@ export function TicTacToeController() {
         <section id="grid-section">
             {gridSection()}
         </section>
-        <section id="grid-text-section" className={gameGoing ? "inactive" : "grid-text"}>
-            <h1 className="text">
-                {winner == null ? "Kein Gewinner! Unentschieden!" : `${winner} hat gewonnen!`}
-            </h1>
-            <h2 className="text">
-                Möchtest du nocheinmal spielen?
-            </h2>
-            <button className="btn" onClick={restart}>
-                New Round
-            </button>
+        {!gameGoing ? <Subtitle winner={winner} restart={restart} />: null } {/*if the game is over, the subtitle shows up*/}
 
-        </section>
     </main>);
 }
 
@@ -98,4 +102,21 @@ function Grid(props) {
                  value={props.value}>
         {props.grid[props.value] == 0 ? <i className="fa-solid fa-x"></i> : props.grid[props.value] == 1 ? <i
             className="fa-solid fa-o"></i> : ""}</div>);
+}
+
+function Subtitle(props) {
+    return (
+        <section id="grid-text-section" className="grid-text">
+            <h1 className="text">
+                {props.winner == null ? "Kein Gewinner! Unentschieden!" : `${props.winner} hat gewonnen!`}
+            </h1>
+            <h2 className="text">
+                Möchtest du nocheinmal spielen?
+            </h2>
+            <button className="btn" onClick={props.restart}>
+                New Round
+            </button>
+
+        </section>
+    )
 }
