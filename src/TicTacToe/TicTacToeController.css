@@ -48,6 +48,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transform-origin: 50% 50%;
+
 
 
 }
@@ -108,7 +110,6 @@
     transition: opacity ease-in-out .2s;
 }
 
-/*
 #line {
     width: 2rem;
     height: 20rem;
@@ -116,8 +117,8 @@
     margin: .5rem;
     border-radius: .5em;
     position: absolute;
-    left: 48vw;
-    bottom: 50vh;
     border: none;
 
-}*/
+
+
+}

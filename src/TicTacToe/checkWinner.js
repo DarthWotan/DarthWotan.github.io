@@ -47,7 +47,7 @@ export function checkWin(grid, player, moves) {
         return false;
 
     }
-    const checkDiagonals = (board, size = 3) => {
+    const checkDiagonalsLeft = (board, size = 3) => {
         // Prüfe die linke obere bis rechte untere Diagonale
         for (let i = 0; i < size; i++) {
             if (board[i * (size + 1)] !== player) {
@@ -57,6 +57,10 @@ export function checkWin(grid, player, moves) {
                 return true;
             }
         }
+
+    }
+
+    const checkDiagonalsRight = (board, size = 3) => {
         // Prüfe die rechte obere bis linke untere Diagonale
         for (let i = 0; i < size; i++) {
             if (board[(i + 1) * (size - 1)] !== player) {
@@ -76,8 +80,10 @@ export function checkWin(grid, player, moves) {
             return [true, "ROW"];
         } else if (checkColumns(grid)) {
             return [true, "COLUMN"];
-        } else if (checkDiagonals(grid)) {
-            return [true, "DIAGONAL"];
+        } else if (checkDiagonalsLeft(grid)) {
+            return [true, "DIAGONAL_LEFT"];
+        } else if (checkDiagonalsRight(grid)) {
+            return [true, "DIAGONAL_RIGHT"]
         } else {
             return [false, "NONE"]
         }
