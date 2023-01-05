@@ -18,12 +18,12 @@ export function checkWin(grid, player, moves) {
                     break;
                 } else if (cell == 2) {
                     // console.log("Treffer")
-                    return true;
+                    return [true, row];
                 }
             }
 
         }
-        return false;
+        return [false, null];
 
 
     }
@@ -39,12 +39,12 @@ export function checkWin(grid, player, moves) {
                     break;
                 } else if (row == 6) {
                     // console.log("Treffer")
-                    return true;
+                    return [true, col];
                 }
             }
 
         }
-        return false;
+        return [false, null];
 
     }
     const checkDiagonalsLeft = (board, size = 3) => {
@@ -67,7 +67,7 @@ export function checkWin(grid, player, moves) {
                 break;
             }
             if (i === size - 1) {
-                return true;
+                return true, null;
             }
         }
         // Keine Diagonale hat das angegebene Symbol
@@ -76,16 +76,18 @@ export function checkWin(grid, player, moves) {
 
 
     const reducer = () => {
-        if (checkRows(grid)) {
-            return [true, "ROW"];
-        } else if (checkColumns(grid)) {
-            return [true, "COLUMN"];
+        const [winRow, rowNumber] = checkRows(grid);
+        const [winColumns, columnNumber] = checkColumns(grid);
+        if (winRow) {
+            return [true, "ROW", rowNumber];
+        } else if (winColumns) {
+            return [true, "COLUMN", columnNumber];
         } else if (checkDiagonalsLeft(grid)) {
-            return [true, "DIAGONAL_LEFT"];
+            return [true, "DIAGONAL_LEFT", null];
         } else if (checkDiagonalsRight(grid)) {
-            return [true, "DIAGONAL_RIGHT"]
+            return [true, "DIAGONAL_RIGHT", null]
         } else {
-            return [false, "NONE"]
+            return [false, "NONE", null]
         }
     }
 
