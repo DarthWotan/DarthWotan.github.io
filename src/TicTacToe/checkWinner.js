@@ -38,7 +38,7 @@ export function checkWin(grid, player, moves) {
                     // console.log("kein Treffer")
                     break;
                 } else if (row == 6) {
-                    // console.log("Treffer")
+                    // console.log(col)
                     return [true, col];
                 }
             }
@@ -67,7 +67,7 @@ export function checkWin(grid, player, moves) {
                 break;
             }
             if (i === size - 1) {
-                return true, null;
+                return true;
             }
         }
         // Keine Diagonale hat das angegebene Symbol
@@ -83,9 +83,9 @@ export function checkWin(grid, player, moves) {
         } else if (winColumns) {
             return [true, "COLUMN", columnNumber];
         } else if (checkDiagonalsLeft(grid)) {
-            return [true, "DIAGONAL_LEFT", null];
+            return [true, "DIAGONAL_LEFT", 4];
         } else if (checkDiagonalsRight(grid)) {
-            return [true, "DIAGONAL_RIGHT", null]
+            return [true, "DIAGONAL_RIGHT", 4]
         } else {
             return [false, "NONE", null]
         }

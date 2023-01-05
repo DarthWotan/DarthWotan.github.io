@@ -11,12 +11,11 @@ export function TicTacToeController() {
     const [winner, setWinner] = useState(null)
     const [gameGoing, setGameGoing] = useState(true);
     const [grid, setGrid] = useState([null, null, null, null, null, null, null, null, null])
-    // const [coordinate, setCoordinate] = useState(0)
     const [moves, setMoves] = useState(0);
     const [winType, setWinType] = useState("NONE");
     const [winningLine, setWinningLine] = useState([]);
     // todo: https://stackoverflow.com/questions/43817118/how-to-get-the-width-of-a-react-element
-    const cellReferences =[
+    const cellReferences = [useRef(null),
         useRef(null),
         useRef(null),
         useRef(null),
@@ -24,15 +23,17 @@ export function TicTacToeController() {
         useRef(null),
         useRef(null),
         useRef(null),
-        useRef(null),
-        useRef(null)
-    ];
-
-    // const dimensions = useContainerDimensions(middleRef);
+        useRef(null)];
+    const [currenRef, setCurrentRef] = useState(cellReferences[4]);
+    const dimensions = useContainerDimensions(currenRef);
+    /*
+    useEffect(() => {
+        // console.log("Current reference has changed!")
+    }, [currenRef])*/
 
 
     const updateGrid = (event, position, player) => {
-        // console.log(event);
+        // console.log(dimensions)
         let newGrid = grid;
         if (grid[position] == null) {
             newGrid = newGrid.map((element, index) => {
@@ -77,16 +78,11 @@ export function TicTacToeController() {
         // coordinate: for rows: 0, 3, 6 || for columns: 0, 1, 2
         // win: boolean, type: String ("ROW", "COLUMN", "DIAGONAL_LEFT", "DIAGONAL_RIGHT", "NONE")
         if (win) {
+            const lineCoordinate = delogCoordinate(newCoordinate, type)
             setWinner(currentPlayer);
             setGameGoing(false);
             setWinType(type);
-
-            // todo: make things work
-            const line = delogCoordinate(newCoordinate, type);
-            line.map((cellID) => {
-                updateCell(cellReferences[cellID])
-            })
-
+            setCurrentRef(cellReferences[lineCoordinate]);
         }
 
 
@@ -97,30 +93,34 @@ export function TicTacToeController() {
             case "ROW": {
                 switch (cords) {
                     case 0:
-                        return [0, 1, 2];
+                        return 1;
                     case 3:
-                        return [3, 4, 5];
+                        return 4;
                     case 6:
-                        return [6, 7, 8];
+                        return 7;
+                    default:
+                        return null;
                 }
                 break;
             }
             case "COLUMN": {
                 switch (cords) {
                     case 0:
-                        return [0, 3, 6];
+                        return 3;
+                    case 1:
+                        return 4;
                     case 2:
-                        return [1, 4, 7];
-                    case 3:
-                        return [2, 6, 8];
+                        return 5;
+                    default:
+                        return null;
                 }
                 break;
             }
             case "DIAGONAL_LEFT": {
-                return [0, 4, 8]
+                return 4;
             }
             case "DIAGONAL_RIGHT": {
-                return [2, 4, 6]
+                return 4;
             }
             default: {
                 return null;
@@ -145,7 +145,7 @@ export function TicTacToeController() {
             grids.push(<Grid key={i} value={i} onClick={updateGrid} player={currentPlayer}
                              grid={grid}
                              className={gameGoing ? "" : "blurred"}
-                             winningLine={winningLine}  ref={cellReferences[i]}/>);
+                             winningLine={winningLine} ref={cellReferences[i]}/>);
         }
         return grids;
     }
@@ -153,9 +153,9 @@ export function TicTacToeController() {
     return (<main id="TicTacToe">
         <section id="grid-section">
             {createGridSection()}
-            {/*
-            {gameGoing ? null : <Line line={winType} x={dimensions.posx} y={dimensions.posy} width={dimensions.width} height={dimensions.height}/>}
-*/}
+            {gameGoing ? null : <Line line={winType} x={dimensions.posx} y={dimensions.posy} width={dimensions.width}
+                                      height={dimensions.height}/>}
+
         </section>
         <section>
             {!gameGoing ? <Subtitle winner={winner}
@@ -194,32 +194,28 @@ function Line(props) {
     const y = props.y;
     const width = props.width;
     const height = props.height;
-    let multiplitcator = 4;
-    let short = false;
+    let [multiplicator, setMultiplicator] = useState(3);
     const lineType = props.line;
-
     const lineRef = useRef(null)
 
     // todo: Strich an richtige Stelle bewegen + überprüfen, warum es manchmal länger oder kürzer ist
     const checkLine = () => {
         switch (lineType) {
             case "COLUMN": {
-                short = true;
-                multiplitcator -= 1;
                 return "";
             }
             case "ROW": {
-                multiplitcator -= 1;
-                short = true;
                 return "rotate(90deg)";
             }
-            case "DIAGONAL_RIGHT":
+            case "DIAGONAL_RIGHT": {
+                setMultiplicator(4)
                 return "rotate(45deg)"
-            case "DIAGONAL_LEFT":
+            }
+            case "DIAGONAL_LEFT": {
+                setMultiplicator(4)
                 return "rotate(-45deg)"
+            }
             default: {
-                short = true;
-                multiplitcator = 0;
                 return ""
             }
                 ;
@@ -230,13 +226,12 @@ function Line(props) {
         document.getElementById("line").style.top = y + height / 2 + "px";
         // Länge ändert sich teils zufällig, sobald etwas geändert wird und das Programm noch läuft
         // Länge ändert sich (nicht), obwohl sie es eigentlich (nicht) sollte
-        document.getElementById("line").style.height = !short ? height * multiplitcator + "px" : height * multiplitcator + "px";
+        document.getElementById("line").style.height = height * multiplicator + "px";
         document.getElementById("line").style.transform = `translate(-${document.getElementById("line").offsetWidth / 1.4}px, -${document.getElementById("line").offsetHeight / 1.95}px) ${checkLine()} `
     }
     useEffect(() => {
         transform();
     })
-    //console.log(checkLine(), lineType)
     return (<div id="line" ref={lineRef}>
 
     </div>);
