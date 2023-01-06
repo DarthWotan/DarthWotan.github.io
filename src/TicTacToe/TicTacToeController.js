@@ -12,9 +12,8 @@ export function TicTacToeController() {
     const [gameGoing, setGameGoing] = useState(true);
     const [grid, setGrid] = useState([null, null, null, null, null, null, null, null, null])
     const [moves, setMoves] = useState(0);
-    const [winType, setWinType] = useState("NONE");
+    const [winType, setWinType] = useState(null);
     const [winningLine, setWinningLine] = useState([]);
-    // todo: https://stackoverflow.com/questions/43817118/how-to-get-the-width-of-a-react-element
     const cellReferences = [useRef(null),
         useRef(null),
         useRef(null),
@@ -30,6 +29,7 @@ export function TicTacToeController() {
     useEffect(() => {
         // console.log("Current reference has changed!")
     }, [currenRef])*/
+
 
 
     const updateGrid = (event, position, player) => {
@@ -49,8 +49,11 @@ export function TicTacToeController() {
             // console.log(checkWin(newGrid, currentPlayer, moves), winner)
             changePlayer(player);
         }
-        if (checkTie(moves)) {
+
+        if (checkTie(moves) && !gameGoing) {
             setGameGoing(false);
+            setWinType("TIE")
+
         }
         // [0, 3, 6]console.log(middleRef.current.offsetWidth)
 
@@ -153,8 +156,9 @@ export function TicTacToeController() {
     return (<main id="TicTacToe">
         <section id="grid-section">
             {createGridSection()}
-            {gameGoing ? null : <Line line={winType} x={dimensions.posx} y={dimensions.posy} width={dimensions.width}
-                                      height={dimensions.height}/>}
+            {gameGoing ? null :
+                <Line line={winType} x={dimensions.posx} y={dimensions.posy} width={dimensions.width}
+                      height={dimensions.height}/>}
 
         </section>
         <section>
@@ -198,7 +202,6 @@ function Line(props) {
     const lineType = props.line;
     const lineRef = useRef(null)
 
-    // todo: Strich an richtige Stelle bewegen + überprüfen, warum es manchmal länger oder kürzer ist
     const checkLine = () => {
         switch (lineType) {
             case "COLUMN": {
@@ -215,17 +218,20 @@ function Line(props) {
                 setMultiplicator(4)
                 return "rotate(-45deg)"
             }
+            case "TIE": {
+                setMultiplicator(0);
+                return "";
+            }
             default: {
                 return ""
             }
                 ;
         }
-    }
+    };
+
     const transform = () => {
         document.getElementById("line").style.left = x + width / 2 + "px";
         document.getElementById("line").style.top = y + height / 2 + "px";
-        // Länge ändert sich teils zufällig, sobald etwas geändert wird und das Programm noch läuft
-        // Länge ändert sich (nicht), obwohl sie es eigentlich (nicht) sollte
         document.getElementById("line").style.height = height * multiplicator + "px";
         document.getElementById("line").style.transform = `translate(-${document.getElementById("line").offsetWidth / 1.4}px, -${document.getElementById("line").offsetHeight / 1.95}px) ${checkLine()} `
     }
